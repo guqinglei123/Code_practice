@@ -1,0 +1,28 @@
+
+{
+    "version": "2.0.0",
+
+    "tasks": [
+        {
+            "label": "clean"
+        },
+        {
+            "label": "build",
+            "command": "make",//使用makefile
+            // "command": "gcc",//单个文件
+            // "args":["-g", "Euclid.c", "-o", "build12"],
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation":  ["relative", "${workspaceRoot}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ]
+}

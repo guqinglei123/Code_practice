@@ -1,0 +1,21 @@
+{
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "vector": "cpp",
+        "functional": "cpp",
+        "ratio": "cpp",
+        "type_traits": "cpp",
+        "slist": "cpp",
+        "ostream": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "list": "cpp",
+        "iostream": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "system_error": "cpp"
+    },
+    "files.encoding": "utf8"
+}
