@@ -13,6 +13,13 @@ Linux常用命令：
 	ifconfig/ifdown/ifup	apt-get install/remove和dpkg	/etc/init.d/服务名 restart 
 	top	free
 
+	Linux 查看当前目录及第一级子目录占用空间统计　du -h --max-depth=1或者　du -h -d 1
+
+	查看当前运行进程，并且杀死该进程：
+		查看： ps aux｜less／top/pstree/pgrep 某进程／atop
+		杀死: kill 进程pid(kill -9 进程pid 强制杀死)
+		　
+
 终端下常用命令：
 
 	Tab 自动补全
@@ -142,8 +149,8 @@ vim中常用快捷键：
 		:q! 强制退出，放弃修改
 
 git常用命令：
+
 	
-	echo "# Code_practice" >> README.md
 	git init
 	git add README.md
 	git commit -m "first commit"
