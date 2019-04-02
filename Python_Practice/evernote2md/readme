@@ -1,0 +1,7 @@
+1.安装满足如下要求的库：
+    oauth2>=1.9.0.post1
+    oauthlib>=1.0.3
+    requests>=2.8.1
+    requests-oauthlib>=0.5.0
+2.在EDAMTest.py中，auth_token
+3.

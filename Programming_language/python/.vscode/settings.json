@@ -1,4 +1,6 @@
 {
     "python.pythonPath": "D:\\guqinglei\\Anaconda3\\envs\\python_robotics\\python.exe",
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "editor.fontFamily": "\"Source Sans Pro, 'Source Sans Pro', monospace\"",
+    "editor.fontWeight": "500"
 }

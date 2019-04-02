@@ -1,0 +1,8 @@
+{
+       // 以像素为单位控制字号。
+       "editor.fontSize": 17,
+       "window.zoomLevel": 1,
+       // 通过使用鼠标滚轮同时按住 Ctrl 可缩放编辑器的字体
+       "editor.mouseWheelZoom": true,
+       "python.pythonPath": "D:\\guqinglei\\Anaconda3\\python.exe"
+}
