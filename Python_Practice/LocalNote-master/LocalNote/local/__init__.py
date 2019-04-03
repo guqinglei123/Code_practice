@@ -1,4 +1,4 @@
-from storage import Storage, clear_dir
-from tools import markdown, html2text
+from local.storage import Storage, clear_dir
+from local.tools import markdown, html2text
 
 __all__ = ['Storage', 'markdown', 'html2text']

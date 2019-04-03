@@ -32,7 +32,7 @@ class Oauth(object):
     @retry(3)
     def _login(self, preloadContent):
         data = {
-            'username': raw_input('Username: ').decode(sys.stdin.encoding),
+            'username': input('Username: ').decode(sys.stdin.encoding),
             'password': getpass.getpass(),
             'login': '登陆',
             'showSwitchService': 'true',
@@ -60,4 +60,4 @@ class Oauth(object):
         return re.compile('<input[^>]*?name="%s"[^>]*?value="(.*?)"'%'accessToken').search(c).groups()[0]
 
 if __name__ == '__main__':
-    print Oauth().oauth()
+    print(Oauth().oauth())

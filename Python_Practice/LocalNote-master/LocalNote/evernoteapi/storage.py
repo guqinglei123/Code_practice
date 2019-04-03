@@ -26,7 +26,7 @@ class Storage():
         s.includeTitle = True
         s.includeUpdated = True
         for nb in noteStore.listNotebooks():
-            if self.notebooks is not None and nb.name not in self.notebooks: continue
+            if self.notebooks is not None and nb.name.encode('UTF-8') not in self.notebooks: continue
             self.storage[nb.name] = {}
             self.storage[nb.name]['notebook'] = nb
             self.storage[nb.name]['notes'] = {}
@@ -70,9 +70,9 @@ class Storage():
         return r.get('notebook')
     def get_note_dict(self):
         noteDict = {}
-        for nbName, nb in self.storage.iteritems():
+        for nbName, nb in self.storage.items():
             noteDict[nbName] = []
-            for nName, n in nb['notes'].iteritems():
+            for nName, n in nb['notes'].items():
                 noteDict[nbName].append((nName, n.updated / 1000))
         return noteDict
     def show_notebook(self):
@@ -85,4 +85,4 @@ class Storage():
                     print_line(('' if notebook else '    ')+nn)
 def print_line(s):
     t = sys.getfilesystemencoding()
-    print s.decode('UTF-8').encode(t)
+    print(s.decode('UTF-8').encode(t))

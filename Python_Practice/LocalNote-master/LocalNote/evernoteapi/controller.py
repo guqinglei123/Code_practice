@@ -1,4 +1,3 @@
-#coding=utf8
 import sys, hashlib, re, time, mimetypes
 
 import evernote.edam.type.ttypes as Types
@@ -6,7 +5,7 @@ import evernote.edam.notestore.NoteStore as NoteStore
 from evernote.edam.error.ttypes import EDAMUserException
 from evernote.api.client import EvernoteClient
 
-from storage import Storage
+from evernoteapi.storage import Storage
 
 class EvernoteController(object):
     def __init__(self, token, isSpecialToken = False, sandbox = False, isInternational = False, notebooks = None):
@@ -30,15 +29,15 @@ class EvernoteController(object):
     def create_notebook(self, noteFullPath):
         if self.get(noteFullPath): return False
         notebook = Types.Notebook()
-        notebook.name = noteFullPath
-        try:
-            notebook = self.noteStore.createNotebook(notebook)
-        except EDAMUserException, e:
-            if e.errorCode == 10 and e.parameter == 'Notebook.name':
-                self.storage.update(self.token, self.noteStore)
-                return True
-            else:
-                raise e
+        # notebook.name = noteFullPath
+        # try:
+        #     notebook = self.noteStore.createNotebook(notebook)
+        # except EDAMUserException, e:
+        #     if e.errorCode == 10 and e.parameter == 'Notebook.name':
+        #         self.storage.update(self.token, self.noteStore)
+        #         return True
+        #     else:
+        #         raise e
         self.storage.create_notebook(notebook)
         return True
     def create_note(self, noteFullPath, content = '', fileDict = {}):
@@ -170,7 +169,7 @@ class EvernoteController(object):
 if __name__ == '__main__':
     # You can get this from 'https://%s/api/DeveloperToken.action'%SERVICE_HOST >>
     # In China it's https://app.yinxiang.com/api/DeveloperToken.action <<
-    token = 'S=s1:U=91eca:E=15be6680420:C=1548eb6d760:P=1cd:A=en-devtoken:V=2:H=026e6ff5f5d0753eb37146a1b4660cc9'
+    token = "S=s542:U=9396ac7:E=16a922a8b90:C=1633a795bf0:P=1cd:A=en-devtoken:V=2:H=a52d36ceee1fbb574a2f8ccf2bada4e3"
     e = EvernoteController(token, True, True)
     # e.update_note('Hello', 'Test', 'Changed', 'README.md')
     e.create_note(['Test', '中文'], 'Chinese')

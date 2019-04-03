@@ -3,15 +3,15 @@ import sys, os, json, time
 
 from controllers import Controller, convert_html
 from evernoteapi.oauth2 import Oauth
-from local import clear_dir
-from exception import main_wrapper
-
+from local.storage import clear_dir
+# from exception import main_wrapper
+from functools import reduce 
 DEBUG = False
 
 def sys_print(s, level = 'info'):
-    print(('[%-4s] %s'%((level+' '*4)[:4].upper(), s.replace(u'\xa0', ' '))).encode(sys.stdin.encoding))
+    print(('[%-4s] %s'%((level+' '*4)[:4].upper(), s.replace(u'\xa0', ' '))))
 def sys_input(s):
-    return raw_input(s.encode(sys.stdin.encoding)).decode(sys.stdin.encoding)
+    return input(s)
 def check_files_format(fn):
     def _check_files_format(*args, **kwargs):
         mainController = Controller()
@@ -35,8 +35,8 @@ def check_files_format(fn):
             sys_print(u'尚未登录', 'warn')
     return _check_files_format
 def show_help(*args):
-    for fn, h in argDict.iteritems():
-        print('%-10s: %s'%(fn, h[1].decode('utf8').encode(sys.stdin.encoding)))
+    for fn, h in argDict.items():
+        print('%-10s: %s'%(fn, h[1]))
 def init(*args):
     mainController = Controller()
     def clear_root():
@@ -44,7 +44,7 @@ def init(*args):
         clear_dir('.')
         return True
     def _init(*args):
-        if not reduce(lambda x,y: x+y, [l for l in os.walk('.').next()[1:]]) or clear_root():
+        if not reduce(lambda x,y: x+y, [l for l in next(os.walk('.'))[1:]]) or clear_root():
             sys_print(u'账户仅需要在第一次使用时设置一次')
             while 1:
                 isInternational = False
@@ -102,14 +102,14 @@ def pull(mainController, *args):
     mainController.fetch_notes()
     # show changes
     for change in mainController.get_changes():
-        if change[1] in (-1, 0): sys_print('/'.join(change[0]).decode('utf8'), 'pull')
+        if change[1] in (-1, 0): sys_print('/'.join(change[0]), 'pull')
     # confirm
     if sys_input(u'是否更新本地文件？[yn] ') == 'y':
         r = mainController.download_notes(False)
         if isinstance(r, list):
             sys_print(u'为存储到本地，请确保笔记名字中没有特殊字符“\\/:*?"<>|”或特殊不可见字符')
             sys_print(u'为兼容Mac电脑，需要将名字为".DS_Store"的笔记本或笔记更名')
-            for noteFullPath in r: sys_print('/'.join(noteFullPath).decode('utf8'))
+            for noteFullPath in r: sys_print('/'.join(noteFullPath))
     print('Bye~')
 @check_files_format
 def push(mainController, *args):
@@ -174,7 +174,7 @@ argDict = {
 def main():
     del sys.argv[0]
     if not sys.argv: sys.argv.append('help')
-    @main_wrapper
+    # @main_wrapper
     def _main():
         argDict.get(sys.argv[0], (show_help,))[0](*sys.argv[1:])
     _main()

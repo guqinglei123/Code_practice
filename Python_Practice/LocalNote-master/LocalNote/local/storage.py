@@ -1,7 +1,7 @@
 import json, os, time, sys, re
 from os.path import join, exists
 import chardet
-
+from functools import reduce 
 CONFIG_DIR = 'user.cfg'
 
 # fileDictFormat: {
@@ -49,21 +49,21 @@ class Storage(object):
     def get_config(self):
         return self.token, self.isSpecialToken, self.sandbox, self.isInternational, self.expireTime, self.lastUpdate, self.notebooks
     def __str_c2l(self, s):
-        return s.decode('utf8').encode(sys.stdin.encoding)
+        return s
     def __str_l2c(self, s):
         try:
-            return s.decode(sys.stdin.encoding).encode('utf8')
+            return s
         except:
-            return s.decode(chardet.detect(s)['encoding'] or 'utf8').encode('utf8')
+            return s
     def read_note(self, noteFullPath):
         attachmentDict = {}
         if exists(self.__str_c2l(join(*noteFullPath))): # note is a foldernote
-            for attachment in os.walk(self.__str_c2l(join(*noteFullPath))).next()[2]:
+            for attachment in next(os.walk(self.__str_c2l(join(*noteFullPath))))[2]:
                 with open(self.__str_c2l(join(*(noteFullPath))) + os.path.sep + attachment, 'rb') as f:
                     attachmentDict[self.__str_l2c(attachment)] = f.read()
         else: # note is a pure file
-            fileList = os.walk(self.__str_c2l(join(*noteFullPath[:-1]))).next()[2]
-            for postfix in ('.md', '.html'):
+            fileList = next( os.walk(self.__str_c2l(join(*noteFullPath[:-1]))))[2]
+            for postfix in ('.md', '.html'): 
                 fName = noteFullPath[-1] + postfix
                 if self.__str_c2l(fName) in fileList:
                     with open(self.__str_c2l(join(*noteFullPath)) + postfix, 'rb') as f:
@@ -89,7 +89,7 @@ class Storage(object):
                     self.write_file(noteFullPath, v, os.path.splitext(k)[1])
             else:
                 if not exists(join(nbName, nName)): os.mkdir(join(nbName, nName))
-                for k, v in contentDict.iteritems():
+                for k, v in contentDict.items():
                     self.write_file(noteFullPath+[k], v, '') # ok, this looks strange, ext is included in k
         else:
             if contentDict: # create folder
@@ -105,18 +105,22 @@ class Storage(object):
             os.mkdir(self.__str_c2l(noteFullPath[0]))
         try:
             noteFullPath[1] += postfix
-            with open(self.__str_c2l(join(*noteFullPath)), 'wb') as f: f.write(content)
+            if (noteFullPath[1]+'.html') == noteFullPath[2]:
+                with open(self.__str_c2l(join(*noteFullPath)), 'w') as f: f.write(content)
+            else:
+                with open(self.__str_c2l(join(*noteFullPath)), 'wb') as f: f.write(content)
+            
             return True
         except:
             return False
     def get_file_dict(self, notebooksList = None):
         fileDict = {}
-        for nbName in os.walk('.').next()[1]: # get folders
+        for nbName in next(os.walk('.'))[1]: # get folders
             nbNameUtf8 = self.__str_l2c(nbName)
             if notebooksList is not None and nbNameUtf8 not in notebooksList: continue
             if nbNameUtf8 == '.DS_Store': continue # Mac .DS_Store ignorance
             fileDict[nbNameUtf8] = []
-            for nName in reduce(lambda x,y: x+y, os.walk(nbName).next()[1:]): # get folders and files
+            for nName in reduce(lambda x,y: x+y, next(os.walk(nbName))[1:]): # get folders and files
                 if nName == '.DS_Store': continue # Mac .DS_Store ignorance
                 filePath = join(nbName, nName)
                 if os.path.isdir(filePath):
@@ -135,14 +139,14 @@ class Storage(object):
         except:
             return False, []
         r = [] # (filename, status) 1 for wrong placement, 2 for too large, 3 for missing main file
-        notebooks, notes = os.walk('.').next()[1:]
+        notebooks, notes = next(os.walk('.'))[1:]
         for note in notes:
             if note not in ('user.cfg', '.DS_Store'): r.append((self.__str_l2c(note), 1))
         for notebook in notebooks:
             if notebook == '.DS_Store': # Mac .DS_Store ignorance
                 r.append(('.DS_Store', 1))
                 continue
-            folderNotes, notes = os.walk(notebook).next()[1:]
+            folderNotes, notes = next(os.walk(notebook))[1:]
             for note in notes:
                 if note == '.DS_Store': continue# Mac .DS_Store ignorance
                 if re.compile('.+\.(md|html)').match(note):
@@ -155,7 +159,7 @@ class Storage(object):
                     r.append((self.__str_l2c(join(notebook, folderNote)), 1))
                     continue# Mac .DS_Store ignorance
                 size = 0
-                wrongFolders, attas = os.walk(join(notebook, folderNote)).next()[1:]
+                wrongFolders, attas = next(os.walk(join(notebook, folderNote)))[1:]
                 if filter(lambda x: re.compile('.+\.(md|html)').match(x), attas) == []:
                     r.append((self.__str_l2c(join(notebook, folderNote)), 3))
                 for atta in attas: size += os.path.getsize(join(notebook, folderNote, atta))
@@ -166,7 +170,7 @@ class Storage(object):
         return True, r
 
 def clear_dir(currentDir):
-    dirs, files = os.walk(currentDir).next()[1:]
+    dirs, files = next(os.walk(currentDir))[1:]
     for d in dirs:
         clear_dir(os.path.join(currentDir, d))
         os.rmdir(os.path.join(currentDir, d))

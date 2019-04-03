@@ -94,13 +94,13 @@ for note in note_store.findNotesMetadata( f, 0, 9999,s).notes:
     contentDict2 = {}
     contentDict2 = contentDict
     
-    if len(contentDict) == 1:
-        for k, v in contentDict2.items():
-            attachmentspath = mediapath +k
-            with open(attachmentspath+[k], 'wb') as f: f.write(v)
-    else:
-        for k, v in contentDict2.iteritems():
-            with open(mediapath+[k], 'wb') as f: f.write(v)
+    # if len(contentDict) == 1:
+    #     for k, v in contentDict2.items():
+    #         attachmentspath = mediapath +k
+    #         with open(attachmentspath+[k], 'wb') as f: f.write(v)
+    # else:
+    #     for k, v in contentDict2.iteritems():
+    #         with open(mediapath+[k], 'wb') as f: f.write(v)
     # open(noteFullPath+note.title+".html","w", buffering=-1, encoding="utf-8").write(content)
     # attachmentDict[noteFullPath+'.html'] = content
     # for k, v in attachmentDict.items():
