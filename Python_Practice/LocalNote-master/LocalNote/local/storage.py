@@ -106,7 +106,7 @@ class Storage(object):
         try:
             noteFullPath[1] += postfix
             if (noteFullPath[1]+'.html') == noteFullPath[2]:
-                with open(self.__str_c2l(join(*noteFullPath)), 'w') as f: f.write(content)
+                with open(self.__str_c2l(join(*noteFullPath)), 'w', buffering=-1, encoding="utf8") as f: f.write(content)
             else:
                 with open(self.__str_c2l(join(*noteFullPath)), 'wb') as f: f.write(content)
             

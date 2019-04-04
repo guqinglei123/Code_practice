@@ -1,7 +1,9 @@
-1.安装满足如下要求的库：
+1.安装满足如下要求的库：(注意电脑中将这些库都安装在了base的解析器，注意编译环境)
     oauth2>=1.9.0.post1
     oauthlib>=1.0.3
     requests>=2.8.1
     requests-oauthlib>=0.5.0
-2.在EDAMTest.py中，auth_token
-3.
+2.在EDAMTest.py中，完成下载evernote中笔记主体和资源文件。但是存在两个问题
+    1).资源文件中不是所有图片都可以下载。
+    2).笔记主体中，没有对图片资源的链接，似乎存在一个hash值
+3.在html2md中实现了将数据将html文件转换为md文件。（？其中的图片等资源怎么处理）

@@ -84,3 +84,17 @@ A: 建议添加浏览器插件，即可即时预览。例如Chrome的[Markdown P
 如果有什么问题或者建议都可以在这个[Issue](https://github.com/littlecodersh/LocalNote/issues/1)和我讨论。
 
 或者也可以在gitter上交流： [![Gitter](https://badges.gitter.im/littlecodersh/LocalNote.svg)](https://gitter.im/littlecodersh/LocalNote?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+
+
+#guqinglei增加
+1.安装需求：
+    requests==2.9.1
+    markdown==2.6.6
+    evernote-sdk-python3==1.25.1（注意设定环境变量PYTHONPATH）
+    chardet==2.3.0
+    html2text==2016.4.2
+    lxml==3.6.0
+2.修改了程序中python 2和 python 3不兼容的部分，操作init/notebook/pulll/status确定没有问题。
+3.将html文件写入二进制形式修改为utf-8形式
+4.该文件一样的存在笔记资源下载不完全，无法链接资源等问题。

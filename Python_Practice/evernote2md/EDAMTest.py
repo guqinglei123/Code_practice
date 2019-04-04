@@ -79,39 +79,39 @@ f.notebookGuid = notebookGuid
 noteFullPath="E:\\Code_practice\\Python_Practice\\evernote2md\\testdata\\"
 for note in note_store.findNotesMetadata( f, 0, 9999,s).notes:
     attachmentDict = {}
-    for resource in (note_store.getNote(note.guid, False, True, False, False).resources or {}):
-        attachmentDict[resource.attributes.fileName] = resource.data.body
-    contentDict = attachmentDict
     r = note_store.getNoteContent(note.guid)
     content = re.compile('[\s\S]*?<en-note[^>]*?>([\s\S]*?)</en-note>').findall(r)[0]
-    contentDict[note.title+'.html'] = content
-    def make_path(p):
-        if os.path.exists(p):       # 判断文件夹是否存在
-            os.rmdir(p)        # 删除文件夹
-        os.mkdir(p)                 # 创建文件夹
-    mediapath = noteFullPath + "media\\"
-    make_path(mediapath)
-    contentDict2 = {}
-    contentDict2 = contentDict
+    with open(noteFullPath+note.title+".html","w", buffering=-1, encoding="utf-8") as f: f.write(content)
+    for resource in (note_store.getNote(note.guid, False, True, False, False).resources or {}):
+        attachmentDict[resource.attributes.fileName] = resource.data.body
+    for k, v in attachmentDict.items():
+        none_count =0;
+        if k == None:
+            k = str(none_count)+".png"
+            none_count = none_count+1
+        else:
+            pass
+        print(k);
+        mediapath = noteFullPath + 'media\\'
+        attachmentspath = mediapath +k
+        # print(type(mediapath),type(v))
+        with open(attachmentspath, 'wb') as f: f.write(v)
+    # for resource in (note_store.getNote(note.guid, False, True, False, False).resources or {}):
+    #     attachmentDict[resource.attributes.fileName] = resource.data.body
+    # contentDict = attachmentDict
+    # r = note_store.getNoteContent(note.guid)
+    # content = re.compile('[\s\S]*?<en-note[^>]*?>([\s\S]*?)</en-note>').findall(r)[0]
+    # contentDict[note.title+'.html'] = content
+    # def make_path(p):
+    #     if os.path.exists(p):       # 判断文件夹是否存在
+    #         os.rmdir(p)        # 删除文件夹
+    #     os.mkdir(p)                 # 创建文件夹
+    # mediapath = noteFullPath + "media\\"
+    # make_path(mediapath)
+    # contentDict2 = {}
+    # contentDict2 = contentDict
     
-    # if len(contentDict) == 1:
-    #     for k, v in contentDict2.items():
-    #         attachmentspath = mediapath +k
-    #         with open(attachmentspath+[k], 'wb') as f: f.write(v)
-    # else:
-    #     for k, v in contentDict2.iteritems():
-    #         with open(mediapath+[k], 'wb') as f: f.write(v)
-    # open(noteFullPath+note.title+".html","w", buffering=-1, encoding="utf-8").write(content)
-    # attachmentDict[noteFullPath+'.html'] = content
-    # for k, v in attachmentDict.items():
-    #     if k == None:
-    #         continue
-    #     else:
-    #         pass
-    #     print(k);
-    #     attachmentspath = mediapath +k
-    #     # print(type(mediapath),type(v))
-    #     with open(attachmentspath, 'wb') as f: f.write(v)
+
 
 # 创建一个新笔记
 # print()

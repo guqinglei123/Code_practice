@@ -139,7 +139,7 @@ def status(mainController, *args):
 def convert(*args):
     if 0 < len(args):
         fileName, ext = os.path.splitext(args[0])
-        if sys_input(u'将会生成：%s，是否继续？[yn] '%(fileName.decode(sys.stdin.encoding) + '.md')) != 'y': return
+        if sys_input(u'将会生成：%s，是否继续？[yn] '%(fileName + '.md')) != 'y': return
         status = convert_html(args[0])
         if status in (1, 2, 4):
             if status == 1:
@@ -156,7 +156,7 @@ def convert(*args):
                 else:
                     status = convert_html(args[0], 
                             sys_input(u'是否覆盖写入，否将自动添加后缀[yn] ') == 'y')
-            sys_print(u'已成功生成%s。'%status.decode(sys.stdin.encoding))
+            sys_print(u'已成功生成%s。'%status)
     else:
         sys_print(u'使用方式：localnote convert 需要转换的文件.html')
 
