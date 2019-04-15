@@ -76,7 +76,7 @@ s.includeTitle = True
 s.includeUpdated = True 
 notebookGuid = note_store.listNotebooks()[0].guid
 f.notebookGuid = notebookGuid
-noteFullPath="E:\\Code_practice\\Python_Practice\\evernote2md\\testdata\\"
+noteFullPath="E:\\Code_practice\\Python_Practice\\evernote2md\\test\\"
 for note in note_store.findNotesMetadata( f, 0, 9999,s).notes:
     attachmentDict = {}
     r = note_store.getNoteContent(note.guid)
