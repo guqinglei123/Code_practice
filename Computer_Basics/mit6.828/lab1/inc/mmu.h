@@ -139,6 +139,7 @@
 #define SEG_NULL						\
 	.word 0, 0;						\
 	.byte 0, 0, 0, 0
+ /* 可见函数需要3个参数，一是type即这个段的访问权限，二是base，这个段的起始地址，三是lim，即这个段的大小界限 . GDT每个表项一共8字节*/
 #define SEG(type,base,lim)					\
 	.word (((lim) >> 12) & 0xffff), ((base) & 0xffff);	\
 	.byte (((base) >> 16) & 0xff), (0x90 | (type)),		\
