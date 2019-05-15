@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'e:\Code_practice\Python_Practice\Dealexcel\Manuscript.ui'
+#
+# Created by: PyQt5 UI code generator 5.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(811, 457)
+        self.graphicsView = QtWidgets.QGraphicsView(Form)
+        self.graphicsView.setGeometry(QtCore.QRect(40, 300, 741, 141))
+        self.graphicsView.setObjectName("graphicsView")
+        self.ClearCacheButton = QtWidgets.QPushButton(Form)
+        self.ClearCacheButton.setGeometry(QtCore.QRect(70, 220, 161, 41))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.ClearCacheButton.setFont(font)
+        self.ClearCacheButton.setObjectName("ClearCacheButton")
+        self.toolButton_2 = QtWidgets.QToolButton(Form)
+        self.toolButton_2.setGeometry(QtCore.QRect(730, 160, 51, 41))
+        self.toolButton_2.setObjectName("toolButton_2")
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setGeometry(QtCore.QRect(240, 80, 171, 51))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.comboBox_2 = QtWidgets.QComboBox(Form)
+        self.comboBox_2.setGeometry(QtCore.QRect(390, 90, 321, 41))
+        self.comboBox_2.setObjectName("comboBox_2")
+        self.label_4 = QtWidgets.QLabel(Form)
+        self.label_4.setGeometry(QtCore.QRect(30, 150, 201, 51))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.toolButton = QtWidgets.QToolButton(Form)
+        self.toolButton.setGeometry(QtCore.QRect(730, 90, 51, 41))
+        self.toolButton.setObjectName("toolButton")
+        self.DepartmentButton = QtWidgets.QPushButton(Form)
+        self.DepartmentButton.setGeometry(QtCore.QRect(320, 220, 161, 41))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.DepartmentButton.setFont(font)
+        self.DepartmentButton.setObjectName("DepartmentButton")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setGeometry(QtCore.QRect(250, 10, 401, 51))
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.comboBox = QtWidgets.QComboBox(Form)
+        self.comboBox.setGeometry(QtCore.QRect(90, 90, 121, 41))
+        self.comboBox.setObjectName("comboBox")
+        self.label_5 = QtWidgets.QLabel(Form)
+        self.label_5.setGeometry(QtCore.QRect(30, 80, 51, 51))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.comboBox_3 = QtWidgets.QComboBox(Form)
+        self.comboBox_3.setGeometry(QtCore.QRect(230, 160, 481, 41))
+        self.comboBox_3.setObjectName("comboBox_3")
+        self.PersonalButton = QtWidgets.QPushButton(Form)
+        self.PersonalButton.setGeometry(QtCore.QRect(580, 220, 171, 41))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.PersonalButton.setFont(font)
+        self.PersonalButton.setObjectName("PersonalButton")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.ClearCacheButton.setText(_translate("Form", "清空缓存"))
+        self.toolButton_2.setText(_translate("Form", "..."))
+        self.label_3.setText(_translate("Form", "月份统计表格"))
+        self.label_4.setText(_translate("Form", "年份刊稿统计表格"))
+        self.toolButton.setText(_translate("Form", "..."))
+        self.DepartmentButton.setText(_translate("Form", "部门刊稿统计"))
+        self.label_2.setText(_translate("Form", "《南机笛声》部门刊稿统计"))
+        self.label_5.setText(_translate("Form", "月份"))
+        self.PersonalButton.setText(_translate("Form", "个人刊稿统计"))
+
